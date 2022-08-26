@@ -1,0 +1,84 @@
+{%extends 'base.html'%}
+{% load static %}
+{%block script%}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+{% comment %} <script src="{%static 'post/main.js'%}" defer></script> {% endcomment %}
+<script src="{%static 'functions.js'%}" defer></script>
+
+{%endblock script%}
+
+
+{%block content%}
+
+
+<a href="/logout"> LogOut</a>
+<div class="w3-bar w3-black">
+  <button class="w3-bar-item w3-button" onclick="openCity('London')">User</button>
+  <button class="w3-bar-item w3-button" onclick="openCity('Custmore')">Custmore</button>
+</div>
+ 
+ <div id="London" class="w3-container city">
+        <button id="addpost" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#AddModel">
+          ADD User
+        </button>
+            
+            <!-- Modal -->
+            <div class="modal fade" id="AddModel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
+            <div class="modal-dialog">
+                <div class="modal-content"> 
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    
+                    <form id ='post-form' method = 'POST' action=''>
+                          {% csrf_token %}
+                          {{user_form}}
+                          
+                      <div class="modal-footer">
+                          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                          <button type="submit" class="btn btn-success" id ='bn1'>Save</button>
+                        </div>
+                    </form>  
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+          <div id="user_list"></div>
+</div> 
+
+<div id="Custmore" class="w3-container city" style="display:none">
+  <button id="cust_post" type="button" class="btn mx-auto btn-primary" data-bs-toggle="modal" data-bs-target="#cust_Model">
+      Add Custmore
+    </button>
+        
+        <!-- Modal -->
+        <div class="modal fade" id="cust_Model" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
+        <div class="modal-dialog">
+            <div class="modal-content"> 
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                
+                <form id ='cust-form1' method = 'POST' action=''>
+                      {% csrf_token %}
+                      {{form2}}
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                      <button type="submit" class="btn btn-success" id ='btn1'>Save</button>
+                    </div>
+                </form>  
+              </div>
+              
+            </div>
+          </div>
+        </div>
+      <div id='cust_list'> </div>
+  </div>
+
+
+{%endblock content%}
